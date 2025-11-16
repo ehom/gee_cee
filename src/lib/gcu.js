@@ -70,16 +70,6 @@ class GCString {
     // --- Public Methods ---
     
     /**
-     * Returns the correct number of User-Perceived Characters (GCs).
-     * This is the linguistically correct "length."
-     * @returns {number} The count of GCs.
-     */
-    count() {
-        // O(1) Constant Time Operation: Accesses the length of the pre-calculated array.
-        return this.#gcArray.length;
-    }
-
-    /**
      * Returns the length of the string based on Grapheme Clusters (UPCs).
      * @returns {number} The count of GCs in the string.
      */
