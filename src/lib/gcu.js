@@ -50,11 +50,42 @@ class GCString {
     #gcArray;
     #rawString;
 
+
+   /**
+     * Creates an instance of GCString.
+     * @param {string | GCString | null | undefined} input - The input to wrap.
+     * It can be a native string, another GCString instance, or null/undefined (which defaults to "").
+     */
+    constructor(input) {
+        let rawString;
+
+        if (input instanceof GCString) {
+            // Case 1: Input is another GCString instance. Access its private #rawString.
+            rawString = input.#rawString;
+        } else if (input === null || input === undefined) {
+            // Case 2: Input is null or undefined (defaults to empty string)
+            rawString = "";
+        } else {
+            // Case 3: Convert any other valid input to a string
+            try {
+                rawString = String(input);
+            } catch (e) {
+                // Catch rare cases where String() might fail (e.g., Symbol)
+                throw new TypeError("GCString input must be coercible to a string.");
+            }
+        }
+
+        this.#rawString = rawString;
+
+        // Pre-calculate the Grapheme Cluster segments once
+        this.#gcArray = segmentStringIntoGCs(rawString);
+    }
+
     /**
      * Initializes a GCString instance by segmenting the input string once.
      * @param {string} str - The raw string to be segmented.
      */
-    constructor(str) {
+    /* constructor(str) {
         if (typeof str !== 'string') {
             throw new Error("GCString constructor requires a string input.");
         }
@@ -65,7 +96,7 @@ class GCString {
         // 1. CALL TO CLOSURE: Call the segmenter closure ONCE to get the GC array.
         // This is the only expensive step.
         this.#gcArray = segmentStringIntoGCs(str);
-    }
+    } */
     
     // --- Public Methods ---
     
