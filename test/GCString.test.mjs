@@ -95,7 +95,7 @@ describe('Code Point Matching vs. Grapheme Cluster Matching', () => {
     });
 
     // NOTE: A true GCString.match() implementation is complex, but here is what the expectation would be:
-    test.skip('The desired GCString Match result', () => {
+    test('The desired GCString Match result', () => {
         // A theoretical GC-aware match (what the user expects)
         const desiredGCMatch = [familyEmoji]; 
 
