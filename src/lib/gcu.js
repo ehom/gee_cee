@@ -81,23 +81,6 @@ class GCString {
         this.#gcArray = segmentStringIntoGCs(rawString);
     }
 
-    /**
-     * Initializes a GCString instance by segmenting the input string once.
-     * @param {string} str - The raw string to be segmented.
-     */
-    /* constructor(str) {
-        if (typeof str !== 'string') {
-            throw new Error("GCString constructor requires a string input.");
-        }
-        
-        // Store the raw string privately
-        this.#rawString = str;
-        
-        // 1. CALL TO CLOSURE: Call the segmenter closure ONCE to get the GC array.
-        // This is the only expensive step.
-        this.#gcArray = segmentStringIntoGCs(str);
-    } */
-    
     // --- Public Methods ---
     
     /**
