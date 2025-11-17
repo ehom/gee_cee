@@ -62,7 +62,7 @@ describe('Code Point Replacement vs. Grapheme Cluster Replacement', () => {
 
     // --- Desired GCString Behavior Comparison ---
 
-    test.skip('The desired GCString.replace() result (UPC-aware)', () => {
+    test('The desired GCString.replace() result (UPC-aware)', () => {
         // A theoretical GCString.replace() should use GC boundaries for matching.
         // If we want to replace the FIRST GC, we replace the whole GC.
         
