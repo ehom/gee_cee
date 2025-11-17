@@ -52,7 +52,7 @@ describe('Code Unit Substring vs. Grapheme Cluster Substring', () => {
 
     // --- Desired GCString Behavior Comparison (GC-aware Substring) ---
 
-    test.skip('The desired GCString.substring() result (UPC-aware)', () => {
+    test('The desired GCString.substring() result (UPC-aware)', () => {
         // 1. Instantiate the GCString
         const gcString = new GCString(complexString); // Length is 6 GCs
 
@@ -61,7 +61,7 @@ describe('Code Unit Substring vs. Grapheme Cluster Substring', () => {
         const desiredResult = gcString.substring(0, 2); 
         
         // DESIRED RESULT: The result should be the raw string "👨‍👩‍👧‍👦T"
-        expect(desiredResult).toBe("👨‍👩‍👧‍👦T"); 
+        expect(desiredResult.toString()).toBe("👨‍👩‍👧‍👦T"); 
         
         // And the new GCString instance should have the correct UPC length (2)
         const resultGC = new GCString(desiredResult);
