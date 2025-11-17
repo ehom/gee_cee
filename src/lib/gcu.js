@@ -149,7 +149,7 @@ class GCString {
     substring(indexA, indexB) {
         // 1. Normalize and swap indices (similar to native JS substring logic).
         let start = Math.max(0, indexA);
-        let end = (indexB === undefined) ? this.count() : Math.max(0, indexB);
+        let end = (indexB === undefined) ? this.length : Math.max(0, indexB);
 
         if (start > end) {
             [start, end] = [end, start]; // Swap
@@ -171,7 +171,7 @@ class GCString {
         const searchLength = searchGCs.length;
 
         // Fast check: If the search string is longer than the available GCs, it can't match.
-        if (searchLength + position > this.count()) {
+        if (searchLength + position > this.length) {
             return false;
         }
 
@@ -193,7 +193,7 @@ class GCString {
      * @param {number} [endPosition] - The UPC index before which the string is considered truncated (exclusive). Defaults to count().
      * @returns {boolean} True if the string ends with the searchString GCs; otherwise, false.
      */
-    endsWith(searchString, endPosition = this.count()) {
+    endsWith(searchString, endPosition = this.length) {
         const searchGCs = segmentStringIntoGCs(searchString);
         const searchLength = searchGCs.length;
 
@@ -240,7 +240,7 @@ class GCString {
     }
 
     padStart(targetLength, padString = ' ') {
-        const currentCount = this.count();
+        const currentCount = this.length;
         
         // 1. Generate the padding GCs
         const paddingGCs = this.#generatePadding(targetLength, currentCount, padString);
@@ -253,7 +253,7 @@ class GCString {
     }
 
     padEnd(targetLength, padString = ' ') {
-        const currentCount = this.count();
+        const currentCount = this.length;
         
         // 1. Generate the padding GCs
         const paddingGCs = this.#generatePadding(targetLength, currentCount, padString);
@@ -272,7 +272,7 @@ class GCString {
     trim() {
         // Find the start index (first non-whitespace GC)
         let startIndex = 0;
-        const count = this.count();
+        const count = this.length;
 
         while (startIndex < count && isWhitespace(this.#gcArray[startIndex])) {
             startIndex++;
@@ -295,7 +295,7 @@ class GCString {
      */
     trimLeft() {
         let startIndex = 0;
-        const count = this.count();
+        const count = this.length;
 
         while (startIndex < count && isWhitespace(this.#gcArray[startIndex])) {
             startIndex++;
@@ -310,7 +310,7 @@ class GCString {
      * @returns {GCString} A new GCString instance.
      */
     trimRight() {
-        const count = this.count();
+        const count = this.length;
         let endIndex = count;
 
         // Check from the end backward until the first non-whitespace GC is found.
@@ -330,7 +330,7 @@ class GCString {
      */
     split(separator, limit) {
         const result = [];
-        const count = this.count();
+        const count = this.length;
         
         // --- 1. Handle Empty String Separator Case ("") ---
         if (separator === "") {
@@ -427,7 +427,7 @@ class GCString {
             codeUnitIndex += gc.length;
         }
         // The very end of the string (where length is) maps to the total count
-        map[this.#rawString.length] = this.count(); 
+        map[this.#rawString.length] = this.length; 
         this.#gcIndexMap = map;
         return map;
     }
