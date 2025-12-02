@@ -30,8 +30,12 @@
     
         <h2><span class="attribs"><span class="type-signature"></span></span>GCString<span class="signature">(str)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">Assumed closure function to segment the string, returning an array of GCs.
-const segmentStringIntoGCs = (function(...) { ... })();</div>
+            <div class="class-description">GCString - A grapheme cluster aware string wrapper class.
+
+This class wraps JavaScript strings and provides methods that operate on
+user-perceived characters (grapheme clusters) rather than code units or code points.
+This ensures correct handling of emojis, combining characters, regional indicators,
+and other complex Unicode sequences.</div>
         
     
 </header>
@@ -54,7 +58,7 @@ const segmentStringIntoGCs = (function(...) { ... })();</div>
 
 
 <div class="description">
-    Initializes a GCString instance by segmenting the input string once.
+    Creates a new GCString instance.
 </div>
 
 
@@ -106,7 +110,7 @@ const segmentStringIntoGCs = (function(...) { ... })();</div>
 
             
 
-            <td class="description last">The raw string to be segmented.</td>
+            <td class="description last">The string to wrap</td>
         </tr>
 
     
@@ -147,7 +151,7 @@ const segmentStringIntoGCs = (function(...) { ... })();</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="gcu.js.html">gcu.js</a>, <a href="gcu.js.html#line43">line 43</a>
+        <a href="gcstring.js.html">gcstring.js</a>, <a href="gcstring.js.html#line29">line 29</a>
     </li></ul></dd>
     
 
@@ -176,6 +180,14 @@ const segmentStringIntoGCs = (function(...) { ... })();</div>
 
 
 
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const gc = new GCString("👨‍👩‍👧‍👦 Hello");
+gc.length       // 7 (grapheme count, not code units)
+gc.charAt(0)    // "👨‍👩‍👧‍👦" (entire family emoji)
+gc.slice(0, 1)  // GCString("👨‍👩‍👧‍👦")</code></pre>
+
+
 
     
     </div>
@@ -197,13 +209,13 @@ const segmentStringIntoGCs = (function(...) { ... })();</div>
 
         
             
-<h4 class="name" id="length"><span class="type-signature"></span>length<span class="type-signature"></span></h4>
+<h4 class="name" id="codeUnitLength"><span class="type-signature"></span>codeUnitLength<span class="type-signature"></span></h4>
 
 
 
 
 <div class="description">
-    Returns the length of the string based on Grapheme Clusters (UPCs).
+    Gets the number of UTF-16 code units (JavaScript's native string length).
 </div>
 
 
@@ -241,7 +253,198 @@ const segmentStringIntoGCs = (function(...) { ... })();</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="gcu.js.html">gcu.js</a>, <a href="gcu.js.html#line76">line 76</a>
+        <a href="gcstring.js.html">gcstring.js</a>, <a href="gcstring.js.html#line72">line 72</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="graphemes"><span class="type-signature"></span>graphemes<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Gets the frozen array of grapheme clusters.
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="gcstring.js.html">gcstring.js</a>, <a href="gcstring.js.html#line54">line 54</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="length"><span class="type-signature"></span>length<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Gets the number of grapheme clusters (user-perceived characters).
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="gcstring.js.html">gcstring.js</a>, <a href="gcstring.js.html#line64">line 64</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>new GCString("👨‍👩‍👧‍👦").length  // 1 (not 11 code units)</code></pre>
+
+
+
+        
+            
+<h4 class="name" id="value"><span class="type-signature"></span>value<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Gets the underlying primitive string value.
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="gcstring.js.html">gcstring.js</a>, <a href="gcstring.js.html#line46">line 46</a>
     </li></ul></dd>
     
 
@@ -269,7 +472,7 @@ const segmentStringIntoGCs = (function(...) { ... })();</div>
     
 
     
-    <h4 class="name" id="charAt"><span class="type-signature"></span>charAt<span class="signature">(index)</span><span class="type-signature"> &rarr; {string|undefined}</span></h4>
+    <h4 class="name" id="at"><span class="type-signature"></span>at<span class="signature">(index)</span><span class="type-signature"> &rarr; {string|undefined}</span></h4>
     
 
     
@@ -277,8 +480,7 @@ const segmentStringIntoGCs = (function(...) { ... })();</div>
 
 
 <div class="description">
-    Returns the GC at a specific User-Perceived Character (UPC) index.
-This is the correct charAt() equivalent.
+    Returns the grapheme cluster at the specified index, supporting negative indices.
 </div>
 
 
@@ -330,7 +532,7 @@ This is the correct charAt() equivalent.
 
             
 
-            <td class="description last">The UPC/GC index.</td>
+            <td class="description last">Grapheme index (negative counts from end)</td>
         </tr>
 
     
@@ -371,7 +573,7 @@ This is the correct charAt() equivalent.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="gcu.js.html">gcu.js</a>, <a href="gcu.js.html#line86">line 86</a>
+        <a href="gcstring.js.html">gcstring.js</a>, <a href="gcstring.js.html#line94">line 94</a>
     </li></ul></dd>
     
 
@@ -400,7 +602,7 @@ This is the correct charAt() equivalent.
 
         
 <div class="param-desc">
-    The full Grapheme Cluster or undefined if out of bounds.
+    The grapheme cluster, or undefined if out of bounds
 </div>
 
 
@@ -425,6 +627,11 @@ This is the correct charAt() equivalent.
 
 
 
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>new GCString("Hello").at(-1)  // "o"</code></pre>
+
+
 
         
             
@@ -432,7 +639,7 @@ This is the correct charAt() equivalent.
     
 
     
-    <h4 class="name" id="codePointAt"><span class="type-signature"></span>codePointAt<span class="signature">()</span><span class="type-signature"> &rarr; {number|undefined}</span></h4>
+    <h4 class="name" id="charAt"><span class="type-signature"></span>charAt<span class="signature">(index)</span><span class="type-signature"> &rarr; {string}</span></h4>
     
 
     
@@ -440,9 +647,7 @@ This is the correct charAt() equivalent.
 
 
 <div class="description">
-    Returns the numeric Unicode code point value of the FIRST code point 
-in the Grapheme Cluster (GC) at the specified GC/UPC index.
-* @param {number} index - The GC/UPC index.
+    Returns the grapheme cluster at the specified index.
 </div>
 
 
@@ -453,119 +658,53 @@ in the Grapheme Cluster (GC) at the specified GC/UPC index.
 
 
 
-
-
-
-
-<dl class="details">
-
+    <h5>Parameters:</h5>
     
 
-    
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="gcu.js.html">gcu.js</a>, <a href="gcu.js.html#line97">line 97</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
+        <th>Type</th>
 
         
-<div class="param-desc">
-    The code point value (a number), or undefined if index is out of bounds.
-</div>
 
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
         
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
 <span class="param-type">number</span>
-|
-
-<span class="param-type">undefined</span>
 
 
-    </dd>
-</dl>
+            
+            </td>
 
-    
-
-
-
-
-
-        
             
 
-    
+            
+
+            <td class="description last">Zero-based grapheme index</td>
+        </tr>
 
     
-    <h4 class="name" id="codePoints"><span class="type-signature"></span>codePoints<span class="signature">()</span><span class="type-signature"> &rarr; {Array.&lt;number>|undefined}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Returns an array containing ALL numeric Unicode code point values 
-that compose the Grapheme Cluster (GC) at the specified GC/UPC index.
-* @param {number} index - The GC/UPC index.
-</div>
-
-
-
-
-
-
-
+    </tbody>
+</table>
 
 
 
@@ -601,7 +740,7 @@ that compose the Grapheme Cluster (GC) at the specified GC/UPC index.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="gcu.js.html">gcu.js</a>, <a href="gcu.js.html#line117">line 117</a>
+        <a href="gcstring.js.html">gcstring.js</a>, <a href="gcstring.js.html#line83">line 83</a>
     </li></ul></dd>
     
 
@@ -630,7 +769,7 @@ that compose the Grapheme Cluster (GC) at the specified GC/UPC index.
 
         
 <div class="param-desc">
-    An array of code point numbers, or undefined if index is out of bounds.
+    The grapheme cluster at the index, or empty string if out of bounds
 </div>
 
 
@@ -641,10 +780,7 @@ that compose the Grapheme Cluster (GC) at the specified GC/UPC index.
     </dt>
     <dd>
         
-<span class="param-type">Array.&lt;number></span>
-|
-
-<span class="param-type">undefined</span>
+<span class="param-type">string</span>
 
 
     </dd>
@@ -653,6 +789,11 @@ that compose the Grapheme Cluster (GC) at the specified GC/UPC index.
     
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>new GCString("👨‍👩‍👧‍👦 Hi").charAt(0)  // "👨‍👩‍👧‍👦"</code></pre>
 
 
 
@@ -670,8 +811,7 @@ that compose the Grapheme Cluster (GC) at the specified GC/UPC index.
 
 
 <div class="description">
-    Concatenates the GCString with the string representations of the arguments.
-Arguments can be native strings or other GCString instances.
+    Concatenates strings together.
 </div>
 
 
@@ -738,7 +878,7 @@ Arguments can be native strings or other GCString instances.
 
             
 
-            <td class="description last">Items to concatenate.</td>
+            <td class="description last">Strings to concatenate</td>
         </tr>
 
     
@@ -779,7 +919,7 @@ Arguments can be native strings or other GCString instances.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="gcu.js.html">gcu.js</a>, <a href="gcu.js.html#line638">line 638</a>
+        <a href="gcstring.js.html">gcstring.js</a>, <a href="gcstring.js.html#line396">line 396</a>
     </li></ul></dd>
     
 
@@ -808,7 +948,7 @@ Arguments can be native strings or other GCString instances.
 
         
 <div class="param-desc">
-    A new, GC-aware GCString instance.
+    A new GCString with concatenated content
 </div>
 
 
@@ -830,6 +970,11 @@ Arguments can be native strings or other GCString instances.
 
 
 
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>new GCString("Hello").concat(" ", "👋")  // GCString("Hello 👋")</code></pre>
+
+
 
         
             
@@ -845,7 +990,7 @@ Arguments can be native strings or other GCString instances.
 
 
 <div class="description">
-    Checks if the GCString ends with the GCs of the searchString.
+    Determines whether the string ends with a search string.
 </div>
 
 
@@ -890,6 +1035,9 @@ Arguments can be native strings or other GCString instances.
             
                 
 <span class="param-type">string</span>
+|
+
+<span class="param-type"><a href="GCString.html">GCString</a></span>
 
 
             
@@ -907,7 +1055,7 @@ Arguments can be native strings or other GCString instances.
 
             
 
-            <td class="description last">The string to search for.</td>
+            <td class="description last">The string to search for</td>
         </tr>
 
     
@@ -940,7 +1088,7 @@ Arguments can be native strings or other GCString instances.
 
             
 
-            <td class="description last">The UPC index before which the string is considered truncated (exclusive). Defaults to count().</td>
+            <td class="description last">Treat the string as if it were this length</td>
         </tr>
 
     
@@ -981,7 +1129,7 @@ Arguments can be native strings or other GCString instances.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="gcu.js.html">gcu.js</a>, <a href="gcu.js.html#line196">line 196</a>
+        <a href="gcstring.js.html">gcstring.js</a>, <a href="gcstring.js.html#line217">line 217</a>
     </li></ul></dd>
     
 
@@ -1010,7 +1158,7 @@ Arguments can be native strings or other GCString instances.
 
         
 <div class="param-desc">
-    True if the string ends with the searchString GCs; otherwise, false.
+    true if the string ends with the search string
 </div>
 
 
@@ -1039,7 +1187,7 @@ Arguments can be native strings or other GCString instances.
     
 
     
-    <h4 class="name" id="localeCompare"><span class="type-signature"></span>localeCompare<span class="signature">(compareString, locales<span class="signature-attributes">opt</span>, options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {number}</span></h4>
+    <h4 class="name" id="includes"><span class="type-signature"></span>includes<span class="signature">(searchString, position<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
     
 
     
@@ -1047,607 +1195,7 @@ Arguments can be native strings or other GCString instances.
 
 
 <div class="description">
-    Compares the GCString with another string (or GCString) according to the 
-current locale's sort order rules.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-        <th>Attributes</th>
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>compareString</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-|
-
-<span class="param-type"><a href="GCString.html">GCString</a></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">The string to compare against.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>locales</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-|
-
-<span class="param-type">Array.&lt;string></span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">A string or array of locale tags.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>options</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">object</span>
-
-
-            
-            </td>
-
-            
-                <td class="attributes">
-                
-                    &lt;optional><br>
-                
-
-                
-
-                
-                </td>
-            
-
-            
-
-            <td class="description last">An object containing properties to customize the comparison.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="gcu.js.html">gcu.js</a>, <a href="gcu.js.html#line660">line 660</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    A negative, positive, or zero value indicating sort order.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">number</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="match"><span class="type-signature"></span>match<span class="signature">(regexp)</span><span class="type-signature"> &rarr; {RegExpMatchArray|null}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Executes a search for a match in the GCString using a regular expression.
-Corrects the 'index' property of the match object to be the GC/UPC index.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>regexp</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">RegExp</span>
-|
-
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The regular expression to match against.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="gcu.js.html">gcu.js</a>, <a href="gcu.js.html#line456">line 456</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    A match array with a corrected GC/UPC index, or null.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">RegExpMatchArray</span>
-|
-
-<span class="param-type">null</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="matchAll"><span class="type-signature">(generator) </span>matchAll<span class="signature">(regexp)</span><span class="type-signature"> &rarr; {IterableIterator.&lt;RegExpMatchArray>}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Returns an iterator of all results matching a regular expression against the GCString.
-Each match result object's 'index' property is corrected to the GC/UPC index.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>regexp</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">RegExp</span>
-|
-
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The regular expression to match against. Must be global (/g).</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="gcu.js.html">gcu.js</a>, <a href="gcu.js.html#line485">line 485</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Throws:</h5>
-
-        
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        If the RegExp is not global.
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">TypeError</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-
-    
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    An iterator yielding match objects with corrected indices.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">IterableIterator.&lt;RegExpMatchArray></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="normalize"><span class="type-signature"></span>normalize<span class="signature">(form<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="GCString.html">GCString</a>}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Returns the Unicode Normalization Form of the string.
+    Determines whether the string contains a search string.
 </div>
 
 
@@ -1687,13 +1235,51 @@ Each match result object's 'index' property is corrected to the GC/UPC index.
 
         <tr>
             
-                <td class="name"><code>form</code></td>
+                <td class="name"><code>searchString</code></td>
             
 
             <td class="type">
             
                 
 <span class="param-type">string</span>
+|
+
+<span class="param-type"><a href="GCString.html">GCString</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">The string to search for</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>position</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
 
 
             
@@ -1714,12 +1300,12 @@ Each match result object's 'index' property is corrected to the GC/UPC index.
             
                 <td class="default">
                 
-                    'NFC'
+                    0
                 
                 </td>
             
 
-            <td class="description last">The normalization form to use ('NFC', 'NFD', 'NFKC', or 'NFKD').</td>
+            <td class="description last">The grapheme index to start searching from</td>
         </tr>
 
     
@@ -1760,7 +1346,7 @@ Each match result object's 'index' property is corrected to the GC/UPC index.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="gcu.js.html">gcu.js</a>, <a href="gcu.js.html#line675">line 675</a>
+        <a href="gcstring.js.html">gcstring.js</a>, <a href="gcstring.js.html#line197">line 197</a>
     </li></ul></dd>
     
 
@@ -1789,7 +1375,7 @@ Each match result object's 'index' property is corrected to the GC/UPC index.
 
         
 <div class="param-desc">
-    A new, normalized, and GC-aware GCString instance.
+    true if the search string is found, false otherwise
 </div>
 
 
@@ -1800,7 +1386,7 @@ Each match result object's 'index' property is corrected to the GC/UPC index.
     </dt>
     <dd>
         
-<span class="param-type"><a href="GCString.html">GCString</a></span>
+<span class="param-type">boolean</span>
 
 
     </dd>
@@ -1818,7 +1404,7 @@ Each match result object's 'index' property is corrected to the GC/UPC index.
     
 
     
-    <h4 class="name" id="replace"><span class="type-signature"></span>replace<span class="signature">(pattern, replacement)</span><span class="type-signature"> &rarr; {<a href="GCString.html">GCString</a>}</span></h4>
+    <h4 class="name" id="indexOf"><span class="type-signature"></span>indexOf<span class="signature">(searchString, position<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {number}</span></h4>
     
 
     
@@ -1826,8 +1412,7 @@ Each match result object's 'index' property is corrected to the GC/UPC index.
 
 
 <div class="description">
-    Replaces the first occurrence of a pattern (string or RegExp) with a replacement string.
-The operation is GC/UPC-aware and returns a new GCString instance.
+    Returns the grapheme index of the first occurrence of a search string.
 </div>
 
 
@@ -1851,7 +1436,11 @@ The operation is GC/UPC-aware and returns a new GCString instance.
         <th>Type</th>
 
         
+        <th>Attributes</th>
+        
 
+        
+        <th>Default</th>
         
 
         <th class="last">Description</th>
@@ -1863,52 +1452,77 @@ The operation is GC/UPC-aware and returns a new GCString instance.
 
         <tr>
             
-                <td class="name"><code>pattern</code></td>
+                <td class="name"><code>searchString</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">RegExp</span>
+<span class="param-type">string</span>
 |
 
-<span class="param-type">string</span>
+<span class="param-type"><a href="GCString.html">GCString</a></span>
 
 
             
             </td>
 
             
+                <td class="attributes">
+                
 
+                
+
+                
+                </td>
             
 
-            <td class="description last">The pattern to search for.</td>
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">The string to search for</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>replacement</code></td>
+                <td class="name"><code>position</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
-|
-
-<span class="param-type">function</span>
+<span class="param-type">number</span>
 
 
             
             </td>
 
             
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
 
+                
+
+                
+                </td>
             
 
-            <td class="description last">The string or function to use as replacement.</td>
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+
+            <td class="description last">The grapheme index to start searching from</td>
         </tr>
 
     
@@ -1949,7 +1563,7 @@ The operation is GC/UPC-aware and returns a new GCString instance.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="gcu.js.html">gcu.js</a>, <a href="gcu.js.html#line513">line 513</a>
+        <a href="gcstring.js.html">gcstring.js</a>, <a href="gcstring.js.html#line145">line 145</a>
     </li></ul></dd>
     
 
@@ -1972,42 +1586,13 @@ The operation is GC/UPC-aware and returns a new GCString instance.
 
 
 
-<h5>Throws:</h5>
-
-        
-
-<dl>
-    <dt>
-        <div class="param-desc">
-        If the pattern is a global RegExp, as it should use replaceAll().
-        </div>
-    </dt>
-    <dd></dd>
-    <dt>
-        <dl>
-            <dt>
-                Type
-            </dt>
-            <dd>
-                
-<span class="param-type">Error</span>
-
-
-            </dd>
-        </dl>
-    </dt>
-    <dd></dd>
-</dl>
-
-
-    
 
 
 <h5>Returns:</h5>
 
         
 <div class="param-desc">
-    A new GCString instance with the replacement applied.
+    The grapheme index of the match, or -1 if not found
 </div>
 
 
@@ -2018,7 +1603,7 @@ The operation is GC/UPC-aware and returns a new GCString instance.
     </dt>
     <dd>
         
-<span class="param-type"><a href="GCString.html">GCString</a></span>
+<span class="param-type">number</span>
 
 
     </dd>
@@ -2029,6 +1614,11 @@ The operation is GC/UPC-aware and returns a new GCString instance.
 
 
 
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>new GCString("Hello 👋 World").indexOf("👋")  // 6</code></pre>
+
+
 
         
             
@@ -2036,7 +1626,7 @@ The operation is GC/UPC-aware and returns a new GCString instance.
     
 
     
-    <h4 class="name" id="replaceAll"><span class="type-signature"></span>replaceAll<span class="signature">(pattern, replacement)</span><span class="type-signature"> &rarr; {<a href="GCString.html">GCString</a>}</span></h4>
+    <h4 class="name" id="lastIndexOf"><span class="type-signature"></span>lastIndexOf<span class="signature">(searchString, position<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {number}</span></h4>
     
 
     
@@ -2044,9 +1634,7 @@ The operation is GC/UPC-aware and returns a new GCString instance.
 
 
 <div class="description">
-    Replaces ALL occurrences of a pattern (string or global RegExp) with a replacement.
-This method leverages the native String.prototype.replaceAll() for performance and 
-returns a new GCString instance.
+    Returns the grapheme index of the last occurrence of a search string.
 </div>
 
 
@@ -2070,6 +1658,8 @@ returns a new GCString instance.
         <th>Type</th>
 
         
+        <th>Attributes</th>
+        
 
         
 
@@ -2082,33 +1672,7 @@ returns a new GCString instance.
 
         <tr>
             
-                <td class="name"><code>pattern</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">RegExp</span>
-|
-
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The pattern to search for. Must be a global RegExp or a string.</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>replacement</code></td>
+                <td class="name"><code>searchString</code></td>
             
 
             <td class="type">
@@ -2117,180 +1681,58 @@ returns a new GCString instance.
 <span class="param-type">string</span>
 |
 
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The string or function to use as replacement.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="gcu.js.html">gcu.js</a>, <a href="gcu.js.html#line551">line 551</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    A new GCString instance with all replacements applied.
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
 <span class="param-type"><a href="GCString.html">GCString</a></span>
 
 
-    </dd>
-</dl>
+            
+            </td>
 
-    
+            
+                <td class="attributes">
+                
 
+                
 
-
-
-
-        
+                
+                </td>
             
 
-    
+            
 
-    
-    <h4 class="name" id="search"><span class="type-signature"></span>search<span class="signature">(regexp)</span><span class="type-signature"> &rarr; {number}</span></h4>
-    
+            <td class="description last">The string to search for</td>
+        </tr>
 
-    
-
-
-
-<div class="description">
-    Executes a search for a match in the GCString using a regular expression
-and returns the GC/UPC index of the first match.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
     
 
         <tr>
             
-                <td class="name"><code>regexp</code></td>
+                <td class="name"><code>position</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">RegExp</span>
-|
-
-<span class="param-type">string</span>
+<span class="param-type">number</span>
 
 
             
             </td>
 
             
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
 
             
 
-            <td class="description last">The regular expression to search with.</td>
+            <td class="description last">The grapheme index to start searching backwards from</td>
         </tr>
 
     
@@ -2331,7 +1773,7 @@ and returns the GC/UPC index of the first match.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="gcu.js.html">gcu.js</a>, <a href="gcu.js.html#line568">line 568</a>
+        <a href="gcstring.js.html">gcstring.js</a>, <a href="gcstring.js.html#line169">line 169</a>
     </li></ul></dd>
     
 
@@ -2360,7 +1802,7 @@ and returns the GC/UPC index of the first match.
 
         
 <div class="param-desc">
-    The GC/UPC index of the first match, or -1 if no match is found.
+    The grapheme index of the match, or -1 if not found
 </div>
 
 
@@ -2389,7 +1831,7 @@ and returns the GC/UPC index of the first match.
     
 
     
-    <h4 class="name" id="split"><span class="type-signature"></span>split<span class="signature">(separator, limit<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Array.&lt;string>}</span></h4>
+    <h4 class="name" id="padEnd"><span class="type-signature"></span>padEnd<span class="signature">(targetLength, padString<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="GCString.html">GCString</a>}</span></h4>
     
 
     
@@ -2397,7 +1839,806 @@ and returns the GC/UPC index of the first match.
 
 
 <div class="description">
-    Splits the GCString into an array of strings using a GC-aware separator.
+    Pads the string from the end to reach a target grapheme length.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>targetLength</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">The target grapheme length</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>padString</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    ' '
+                
+                </td>
+            
+
+            <td class="description last">The string to pad with</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="gcstring.js.html">gcstring.js</a>, <a href="gcstring.js.html#line278">line 278</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    A new padded GCString
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="GCString.html">GCString</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="padStart"><span class="type-signature"></span>padStart<span class="signature">(targetLength, padString<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="GCString.html">GCString</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Pads the string from the start to reach a target grapheme length.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>targetLength</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last">The target grapheme length</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>padString</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    ' '
+                
+                </td>
+            
+
+            <td class="description last">The string to pad with</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="gcstring.js.html">gcstring.js</a>, <a href="gcstring.js.html#line257">line 257</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    A new padded GCString
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="GCString.html">GCString</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>new GCString("Hi").padStart(5, "👋")  // GCString("👋👋👋Hi")</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="repeat"><span class="type-signature"></span>repeat<span class="signature">(count)</span><span class="type-signature"> &rarr; {<a href="GCString.html">GCString</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Repeats the string a specified number of times.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>count</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Number of times to repeat (must be non-negative)</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="gcstring.js.html">gcstring.js</a>, <a href="gcstring.js.html#line298">line 298</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    A new GCString with the repeated content
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="GCString.html">GCString</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="slice"><span class="type-signature"></span>slice<span class="signature">(start, end<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="GCString.html">GCString</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Extracts a section of the string by grapheme positions and returns a new GCString.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>start</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Starting grapheme index (inclusive)</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>end</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Ending grapheme index (exclusive)</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="gcstring.js.html">gcstring.js</a>, <a href="gcstring.js.html#line107">line 107</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    A new GCString containing the extracted section
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="GCString.html">GCString</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>new GCString("👨‍👩‍👧‍👦 Hello").slice(0, 1)  // GCString("👨‍👩‍👧‍👦")</code></pre>
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="split"><span class="type-signature"></span>split<span class="signature">(separator, limit<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Array.&lt;<a href="GCString.html">GCString</a>>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Splits the string into an array of GCStrings using a separator.
 </div>
 
 
@@ -2442,6 +2683,9 @@ and returns the GC/UPC index of the first match.
             
                 
 <span class="param-type">string</span>
+|
+
+<span class="param-type">RegExp</span>
 
 
             
@@ -2459,7 +2703,7 @@ and returns the GC/UPC index of the first match.
 
             
 
-            <td class="description last">The string used to divide the GCString.</td>
+            <td class="description last">The separator pattern (empty string splits into graphemes)</td>
         </tr>
 
     
@@ -2492,7 +2736,7 @@ and returns the GC/UPC index of the first match.
 
             
 
-            <td class="description last">A value limiting the number of segments returned.</td>
+            <td class="description last">Maximum number of splits</td>
         </tr>
 
     
@@ -2533,7 +2777,7 @@ and returns the GC/UPC index of the first match.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="gcu.js.html">gcu.js</a>, <a href="gcu.js.html#line331">line 331</a>
+        <a href="gcstring.js.html">gcstring.js</a>, <a href="gcstring.js.html#line232">line 232</a>
     </li></ul></dd>
     
 
@@ -2562,7 +2806,7 @@ and returns the GC/UPC index of the first match.
 
         
 <div class="param-desc">
-    An array of standard JavaScript strings.
+    Array of GCString instances
 </div>
 
 
@@ -2573,7 +2817,7 @@ and returns the GC/UPC index of the first match.
     </dt>
     <dd>
         
-<span class="param-type">Array.&lt;string></span>
+<span class="param-type">Array.&lt;<a href="GCString.html">GCString</a>></span>
 
 
     </dd>
@@ -2582,6 +2826,11 @@ and returns the GC/UPC index of the first match.
     
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>new GCString("👋 Hi").split('')  // [GCString("👋"), GCString(" "), GCString("H"), GCString("i")]</code></pre>
 
 
 
@@ -2599,7 +2848,7 @@ and returns the GC/UPC index of the first match.
 
 
 <div class="description">
-    Checks if the GCString starts with the GCs of the searchString at a given position (UPC index).
+    Determines whether the string starts with a search string.
 </div>
 
 
@@ -2646,6 +2895,9 @@ and returns the GC/UPC index of the first match.
             
                 
 <span class="param-type">string</span>
+|
+
+<span class="param-type"><a href="GCString.html">GCString</a></span>
 
 
             
@@ -2667,7 +2919,7 @@ and returns the GC/UPC index of the first match.
                 </td>
             
 
-            <td class="description last">The string to search for.</td>
+            <td class="description last">The string to search for</td>
         </tr>
 
     
@@ -2706,7 +2958,7 @@ and returns the GC/UPC index of the first match.
                 </td>
             
 
-            <td class="description last">The GC/UPC index to start searching from.</td>
+            <td class="description last">The grapheme index to start checking from</td>
         </tr>
 
     
@@ -2747,7 +2999,7 @@ and returns the GC/UPC index of the first match.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="gcu.js.html">gcu.js</a>, <a href="gcu.js.html#line168">line 168</a>
+        <a href="gcstring.js.html">gcstring.js</a>, <a href="gcstring.js.html#line207">line 207</a>
     </li></ul></dd>
     
 
@@ -2776,7 +3028,7 @@ and returns the GC/UPC index of the first match.
 
         
 <div class="param-desc">
-    True if the string starts with the searchString GCs; otherwise, false.
+    true if the string starts with the search string
 </div>
 
 
@@ -2805,7 +3057,7 @@ and returns the GC/UPC index of the first match.
     
 
     
-    <h4 class="name" id="toLocaleLowerCase"><span class="type-signature"></span>toLocaleLowerCase<span class="signature">(locales<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="GCString.html">GCString</a>}</span></h4>
+    <h4 class="name" id="substr"><span class="type-signature"></span>substr<span class="signature">(start, length<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="GCString.html">GCString</a>}</span></h4>
     
 
     
@@ -2813,8 +3065,7 @@ and returns the GC/UPC index of the first match.
 
 
 <div class="description">
-    Converts all the alphabetic characters in a GCString to lowercase, 
-taking into account the host environment's current locale.
+    Extracts graphemes starting at a position with a specified length.
 </div>
 
 
@@ -2852,16 +3103,44 @@ taking into account the host environment's current locale.
 
         <tr>
             
-                <td class="name"><code>locales</code></td>
+                <td class="name"><code>start</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
-|
+<span class="param-type">number</span>
 
-<span class="param-type">Array.&lt;string></span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Starting grapheme index (negative counts from end)</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>length</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
 
 
             
@@ -2881,7 +3160,7 @@ taking into account the host environment's current locale.
 
             
 
-            <td class="description last">A string or array of locale tags.</td>
+            <td class="description last">Number of graphemes to extract</td>
         </tr>
 
     
@@ -2910,6 +3189,8 @@ taking into account the host environment's current locale.
     
 
     
+        <dt class="important tag-deprecated">Deprecated:</dt><dd><ul class="dummy"><li>Use slice() instead</li></ul></dd>
+    
 
     
 
@@ -2922,7 +3203,7 @@ taking into account the host environment's current locale.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="gcu.js.html">gcu.js</a>, <a href="gcu.js.html#line608">line 608</a>
+        <a href="gcstring.js.html">gcstring.js</a>, <a href="gcstring.js.html#line131">line 131</a>
     </li></ul></dd>
     
 
@@ -2951,7 +3232,7 @@ taking into account the host environment's current locale.
 
         
 <div class="param-desc">
-    A new, lowercase, and GC-aware GCString instance.
+    A new GCString containing the substring
 </div>
 
 
@@ -2980,7 +3261,7 @@ taking into account the host environment's current locale.
     
 
     
-    <h4 class="name" id="toLocaleUpperCase"><span class="type-signature"></span>toLocaleUpperCase<span class="signature">(locales<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="GCString.html">GCString</a>}</span></h4>
+    <h4 class="name" id="substring"><span class="type-signature"></span>substring<span class="signature">(start, end<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="GCString.html">GCString</a>}</span></h4>
     
 
     
@@ -2988,8 +3269,7 @@ taking into account the host environment's current locale.
 
 
 <div class="description">
-    Converts all the alphabetic characters in a GCString to uppercase, 
-taking into account the host environment's current locale.
+    Extracts graphemes between two indices, swapping them if start > end.
 </div>
 
 
@@ -3027,16 +3307,44 @@ taking into account the host environment's current locale.
 
         <tr>
             
-                <td class="name"><code>locales</code></td>
+                <td class="name"><code>start</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
-|
+<span class="param-type">number</span>
 
-<span class="param-type">Array.&lt;string></span>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Starting grapheme index</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>end</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
 
 
             
@@ -3056,7 +3364,7 @@ taking into account the host environment's current locale.
 
             
 
-            <td class="description last">A string or array of locale tags.</td>
+            <td class="description last">Ending grapheme index</td>
         </tr>
 
     
@@ -3097,7 +3405,7 @@ taking into account the host environment's current locale.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="gcu.js.html">gcu.js</a>, <a href="gcu.js.html#line623">line 623</a>
+        <a href="gcstring.js.html">gcstring.js</a>, <a href="gcstring.js.html#line117">line 117</a>
     </li></ul></dd>
     
 
@@ -3126,7 +3434,465 @@ taking into account the host environment's current locale.
 
         
 <div class="param-desc">
-    A new, uppercase, and GC-aware GCString instance.
+    A new GCString containing the substring
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="GCString.html">GCString</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="toLocaleLowerCase"><span class="type-signature"></span>toLocaleLowerCase<span class="signature">(locale<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="GCString.html">GCString</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Converts to lowercase using locale-specific rules.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>locale</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">Array.&lt;string></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Locale or array of locales</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="gcstring.js.html">gcstring.js</a>, <a href="gcstring.js.html#line336">line 336</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    A new GCString in lowercase
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="GCString.html">GCString</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="toLocaleUpperCase"><span class="type-signature"></span>toLocaleUpperCase<span class="signature">(locale<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="GCString.html">GCString</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Converts to uppercase using locale-specific rules.
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>locale</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">Array.&lt;string></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">Locale or array of locales</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="gcstring.js.html">gcstring.js</a>, <a href="gcstring.js.html#line345">line 345</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    A new GCString in uppercase
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="GCString.html">GCString</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="toLowerCase"><span class="type-signature"></span>toLowerCase<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="GCString.html">GCString</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Converts all characters to lowercase.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="gcstring.js.html">gcstring.js</a>, <a href="gcstring.js.html#line319">line 319</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    A new GCString in lowercase
 </div>
 
 
@@ -3163,7 +3929,7 @@ taking into account the host environment's current locale.
 
 
 <div class="description">
-    Returns the raw string this GCString was created from.
+    Returns the primitive string value.
 </div>
 
 
@@ -3207,7 +3973,7 @@ taking into account the host environment's current locale.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="gcu.js.html">gcu.js</a>, <a href="gcu.js.html#line688">line 688</a>
+        <a href="gcstring.js.html">gcstring.js</a>, <a href="gcstring.js.html#line377">line 377</a>
     </li></ul></dd>
     
 
@@ -3235,6 +4001,10 @@ taking into account the host environment's current locale.
 <h5>Returns:</h5>
 
         
+<div class="param-desc">
+    The underlying string
+</div>
+
 
 
 <dl>
@@ -3261,6 +4031,116 @@ taking into account the host environment's current locale.
     
 
     
+    <h4 class="name" id="toUpperCase"><span class="type-signature"></span>toUpperCase<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="GCString.html">GCString</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Converts all characters to uppercase.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="gcstring.js.html">gcstring.js</a>, <a href="gcstring.js.html#line327">line 327</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    A new GCString in uppercase
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="GCString.html">GCString</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="trim"><span class="type-signature"></span>trim<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="GCString.html">GCString</a>}</span></h4>
     
 
@@ -3269,7 +4149,7 @@ taking into account the host environment's current locale.
 
 
 <div class="description">
-    Removes leading and trailing Unicode whitespace GCs.
+    Removes whitespace from both ends of the string.
 </div>
 
 
@@ -3313,7 +4193,7 @@ taking into account the host environment's current locale.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="gcu.js.html">gcu.js</a>, <a href="gcu.js.html#line272">line 272</a>
+        <a href="gcstring.js.html">gcstring.js</a>, <a href="gcstring.js.html#line353">line 353</a>
     </li></ul></dd>
     
 
@@ -3342,7 +4222,7 @@ taking into account the host environment's current locale.
 
         
 <div class="param-desc">
-    A new GCString instance.
+    A new trimmed GCString
 </div>
 
 
@@ -3371,7 +4251,7 @@ taking into account the host environment's current locale.
     
 
     
-    <h4 class="name" id="trimLeft"><span class="type-signature"></span>trimLeft<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="GCString.html">GCString</a>}</span></h4>
+    <h4 class="name" id="trimEnd"><span class="type-signature"></span>trimEnd<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="GCString.html">GCString</a>}</span></h4>
     
 
     
@@ -3379,7 +4259,7 @@ taking into account the host environment's current locale.
 
 
 <div class="description">
-    Removes leading (left) Unicode whitespace GCs. (Equivalent to trimStart).
+    Removes whitespace from the end of the string.
 </div>
 
 
@@ -3423,7 +4303,7 @@ taking into account the host environment's current locale.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="gcu.js.html">gcu.js</a>, <a href="gcu.js.html#line296">line 296</a>
+        <a href="gcstring.js.html">gcstring.js</a>, <a href="gcstring.js.html#line369">line 369</a>
     </li></ul></dd>
     
 
@@ -3452,7 +4332,7 @@ taking into account the host environment's current locale.
 
         
 <div class="param-desc">
-    A new GCString instance.
+    A new trimmed GCString
 </div>
 
 
@@ -3481,7 +4361,7 @@ taking into account the host environment's current locale.
     
 
     
-    <h4 class="name" id="trimRight"><span class="type-signature"></span>trimRight<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="GCString.html">GCString</a>}</span></h4>
+    <h4 class="name" id="trimStart"><span class="type-signature"></span>trimStart<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="GCString.html">GCString</a>}</span></h4>
     
 
     
@@ -3489,7 +4369,7 @@ taking into account the host environment's current locale.
 
 
 <div class="description">
-    Removes trailing (right) Unicode whitespace GCs. (Equivalent to trimEnd).
+    Removes whitespace from the start of the string.
 </div>
 
 
@@ -3533,7 +4413,7 @@ taking into account the host environment's current locale.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="gcu.js.html">gcu.js</a>, <a href="gcu.js.html#line312">line 312</a>
+        <a href="gcstring.js.html">gcstring.js</a>, <a href="gcstring.js.html#line361">line 361</a>
     </li></ul></dd>
     
 
@@ -3562,7 +4442,7 @@ taking into account the host environment's current locale.
 
         
 <div class="param-desc">
-    A new GCString instance.
+    A new trimmed GCString
 </div>
 
 
@@ -3574,6 +4454,116 @@ taking into account the host environment's current locale.
     <dd>
         
 <span class="param-type"><a href="GCString.html">GCString</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="valueOf"><span class="type-signature"></span>valueOf<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Returns the primitive value (same as toString).
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="gcstring.js.html">gcstring.js</a>, <a href="gcstring.js.html#line385">line 385</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The underlying string
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
 
 
     </dd>
@@ -3601,13 +4591,13 @@ taking into account the host environment's current locale.
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="GCString.html">GCString</a></li></ul><h3>Global</h3><ul><li><a href="global.html#segmentStringIntoGCs">segmentStringIntoGCs</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="GCString.html">GCString</a></li><li><a href="GCStringD.html">GCStringD</a></li></ul><h3>Global</h3><ul><li><a href="global.html#segmentIntoGraphemes">segmentIntoGraphemes</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Sun Nov 16 2025 22:58:34 GMT-0800 (Pacific Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.5</a> on Mon Dec 01 2025 18:34:50 GMT-0800 (Pacific Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
