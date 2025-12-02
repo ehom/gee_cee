@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-import GCString from '../../src/lib/gcu.js';
-import GCStringD from '../../src/lib/gcu_d.js';
+import GCString from '../../src/lib/gcstring.js';
+import GCStringD from '../../src/lib/gcstring_d.js';
 
 
 function log(title, value) {

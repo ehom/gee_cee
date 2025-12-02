@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-import GCString from '../lib/gcu.js';
-import GCStringD from '../lib/gcu_d.js';
+import GCString from '../lib/gcstring.js';
+import GCStringD from '../lib/gcstring_d.js';
 
 // --- Test Utilities ---
 
