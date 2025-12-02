@@ -1,0 +1,304 @@
+import GCString from "./gcstring.js"
+
+/**
+ * GCStringD - Debug wrapper for GCString
+ * 
+ * This subclass logs all method calls with their input parameters and return values.
+ * Useful for debugging, testing, and understanding GCString behavior.
+ * 
+ * @example
+ * const gc = new GCStringD("👋 Hello");
+ * gc.slice(0, 2);  // Logs: [slice] Input: start=0, end=2
+ *                   //       [slice] Output: GCStringD("👋 ")
+ */
+
+class GCStringD extends GCString {
+  
+  /**
+   * Creates a new GCStringD instance with debug logging.
+   * @param {string} str - The string to wrap
+   */
+  constructor(str) {
+    console.log('[GCStringD constructor] Input:', { str });
+    super(str);
+    console.log('[GCStringD constructor] Created:', this.toString());
+  }
+  
+  /**
+   * Debug wrapper for charAt
+   */
+  charAt(index) {
+    console.log('[charAt] Input:', { index });
+    const result = super.charAt(index);
+    console.log('[charAt] Output:', result);
+    return result;
+  }
+  
+  /**
+   * Debug wrapper for at
+   */
+  at(index) {
+    console.log('[at] Input:', { index });
+    const result = super.at(index);
+    console.log('[at] Output:', result);
+    return result;
+  }
+  
+  /**
+   * Debug wrapper for slice
+   */
+  slice(start, end) {
+    console.log('[slice] Input:', { start, end });
+    const result = super.slice(start, end);
+    // Convert result to GCStringD
+    const debugResult = new GCStringD(result.toString());
+    console.log('[slice] Output:', debugResult.toString());
+    return debugResult;
+  }
+  
+  /**
+   * Debug wrapper for substring
+   */
+  substring(start, end) {
+    console.log('[substring] Input:', { start, end });
+    const result = super.substring(start, end);
+    const debugResult = new GCStringD(result.toString());
+    console.log('[substring] Output:', debugResult.toString());
+    return debugResult;
+  }
+  
+  /**
+   * Debug wrapper for substr
+   */
+  substr(start, length) {
+    console.log('[substr] Input:', { start, length });
+    const result = super.substr(start, length);
+    const debugResult = new GCStringD(result.toString());
+    console.log('[substr] Output:', debugResult.toString());
+    return debugResult;
+  }
+  
+  /**
+   * Debug wrapper for indexOf
+   */
+  indexOf(searchString, position = 0) {
+    console.log('[indexOf] Input:', { 
+      searchString: searchString instanceof GCString ? searchString.toString() : searchString, 
+      position 
+    });
+    const result = super.indexOf(searchString, position);
+    console.log('[indexOf] Output:', result);
+    return result;
+  }
+  
+  /**
+   * Debug wrapper for lastIndexOf
+   */
+  lastIndexOf(searchString, position) {
+    console.log('[lastIndexOf] Input:', { 
+      searchString: searchString instanceof GCString ? searchString.toString() : searchString, 
+      position 
+    });
+    const result = super.lastIndexOf(searchString, position);
+    console.log('[lastIndexOf] Output:', result);
+    return result;
+  }
+  
+  /**
+   * Debug wrapper for includes
+   */
+  includes(searchString, position = 0) {
+    console.log('[includes] Input:', { 
+      searchString: searchString instanceof GCString ? searchString.toString() : searchString, 
+      position 
+    });
+    const result = super.includes(searchString, position);
+    console.log('[includes] Output:', result);
+    return result;
+  }
+  
+  /**
+   * Debug wrapper for startsWith
+   */
+  startsWith(searchString, position = 0) {
+    console.log('[startsWith] Input:', { 
+      searchString: searchString instanceof GCString ? searchString.toString() : searchString, 
+      position 
+    });
+    const result = super.startsWith(searchString, position);
+    console.log('[startsWith] Output:', result);
+    return result;
+  }
+  
+  /**
+   * Debug wrapper for endsWith
+   */
+  endsWith(searchString, endPosition) {
+    console.log('[endsWith] Input:', { 
+      searchString: searchString instanceof GCString ? searchString.toString() : searchString, 
+      endPosition 
+    });
+    const result = super.endsWith(searchString, endPosition);
+    console.log('[endsWith] Output:', result);
+    return result;
+  }
+  
+  /**
+   * Debug wrapper for split
+   */
+  split(separator, limit) {
+    console.log('[split] Input:', { 
+      separator: separator instanceof RegExp ? separator.toString() : separator, 
+      limit 
+    });
+    const result = super.split(separator, limit);
+    // Convert results to GCStringD instances
+    const debugResults = result.map(part => new GCStringD(part.toString()));
+    console.log('[split] Output:', debugResults.map(d => d.toString()));
+    return debugResults;
+  }
+  
+  /**
+   * Debug wrapper for padStart
+   */
+  padStart(targetLength, padString = ' ') {
+    console.log('[padStart] Input:', { targetLength, padString });
+    const result = super.padStart(targetLength, padString);
+    const debugResult = new GCStringD(result.toString());
+    console.log('[padStart] Output:', debugResult.toString());
+    return debugResult;
+  }
+  
+  /**
+   * Debug wrapper for padEnd
+   */
+  padEnd(targetLength, padString = ' ') {
+    console.log('[padEnd] Input:', { targetLength, padString });
+    const result = super.padEnd(targetLength, padString);
+    const debugResult = new GCStringD(result.toString());
+    console.log('[padEnd] Output:', debugResult.toString());
+    return debugResult;
+  }
+  
+  /**
+   * Debug wrapper for repeat
+   */
+  repeat(count) {
+    console.log('[repeat] Input:', { count });
+    const result = super.repeat(count);
+    const debugResult = new GCStringD(result.toString());
+    console.log('[repeat] Output:', debugResult.toString());
+    return debugResult;
+  }
+  
+  /**
+   * Debug wrapper for toLowerCase
+   */
+  toLowerCase() {
+    console.log('[toLowerCase] Input: (none)');
+    const result = super.toLowerCase();
+    const debugResult = new GCStringD(result.toString());
+    console.log('[toLowerCase] Output:', debugResult.toString());
+    return debugResult;
+  }
+  
+  /**
+   * Debug wrapper for toUpperCase
+   */
+  toUpperCase() {
+    console.log('[toUpperCase] Input: (none)');
+    const result = super.toUpperCase();
+    const debugResult = new GCStringD(result.toString());
+    console.log('[toUpperCase] Output:', debugResult.toString());
+    return debugResult;
+  }
+  
+  /**
+   * Debug wrapper for toLocaleLowerCase
+   */
+  toLocaleLowerCase(locale) {
+    console.log('[toLocaleLowerCase] Input:', { locale });
+    const result = super.toLocaleLowerCase(locale);
+    const debugResult = new GCStringD(result.toString());
+    console.log('[toLocaleLowerCase] Output:', debugResult.toString());
+    return debugResult;
+  }
+  
+  /**
+   * Debug wrapper for toLocaleUpperCase
+   */
+  toLocaleUpperCase(locale) {
+    console.log('[toLocaleUpperCase] Input:', { locale });
+    const result = super.toLocaleUpperCase(locale);
+    const debugResult = new GCStringD(result.toString());
+    console.log('[toLocaleUpperCase] Output:', debugResult.toString());
+    return debugResult;
+  }
+  
+  /**
+   * Debug wrapper for trim
+   */
+  trim() {
+    console.log('[trim] Input: (none)');
+    const result = super.trim();
+    const debugResult = new GCStringD(result.toString());
+    console.log('[trim] Output:', debugResult.toString());
+    return debugResult;
+  }
+  
+  /**
+   * Debug wrapper for trimStart
+   */
+  trimStart() {
+    console.log('[trimStart] Input: (none)');
+    const result = super.trimStart();
+    const debugResult = new GCStringD(result.toString());
+    console.log('[trimStart] Output:', debugResult.toString());
+    return debugResult;
+  }
+  
+  /**
+   * Debug wrapper for trimEnd
+   */
+  trimEnd() {
+    console.log('[trimEnd] Input: (none)');
+    const result = super.trimEnd();
+    const debugResult = new GCStringD(result.toString());
+    console.log('[trimEnd] Output:', debugResult.toString());
+    return debugResult;
+  }
+  
+  /**
+   * Debug wrapper for concat
+   */
+  concat(...strings) {
+    console.log('[concat] Input:', { 
+      strings: strings.map(s => s instanceof GCString ? s.toString() : s) 
+    });
+    const result = super.concat(...strings);
+    const debugResult = new GCStringD(result.toString());
+    console.log('[concat] Output:', debugResult.toString());
+    return debugResult;
+  }
+  
+  /**
+   * Debug wrapper for toString
+   */
+  toString() {
+    const result = super.toString();
+    console.log('[toString] Output:', result);
+    return result;
+  }
+  
+  /**
+   * Debug wrapper for valueOf
+   */
+  valueOf() {
+    const result = super.valueOf();
+    console.log('[valueOf] Output:', result);
+    return result;
+  }
+}
+
+export default GCStringD; 
+
